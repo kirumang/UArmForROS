@@ -133,6 +133,16 @@ source ~/.bashrc
     rosrun uarm pump_node.py off
     ```
 
+- `gripper_node.py` is the node which can control the pump on or off.
+
+    Use this node in the **monitor-mode** of `uarm_core.py` node
+    ```bash
+    # pump on
+    rosrun uarm gripper_node.py on
+    # pump off
+    rosrun uarm gripper_node.py off
+    ```
+
 - `report_angles_node.py` is the node which will report current angles.
 
     Use this node in the **monitor-mode** of `uarm_core.py` node
