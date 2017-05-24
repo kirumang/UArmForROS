@@ -339,10 +339,10 @@ def pumpCallack(data):
 	data_input = data.data
 
 	if data_input == 0:
-		uarm.pump_control(0)
+		uarm.set_pump(0)
 		print 'Pump: Off'
 	elif data_input == 1:
-		uarm.pump_control(1)
+		uarm.set_pump(1)
 		print 'Pump: On'
 	else:
 		pass
@@ -355,14 +355,43 @@ def pumpStrCallack(data):
 	print data_input
 
 	if data_input.lower() == 'low' or data_input.lower() == 'off':
-		uarm.pump_control(0)
+		uarm.set_pump(0)
 		print 'Pump: Off'
 	elif data_input.lower() == 'on' or data_input.lower() == 'high':
-		uarm.pump_control(1)
+		uarm.set_pump(1)
 		print 'Pump: On'
 	else:
 		pass
 
+
+def gripperCallback(data):
+
+	data_input = data.data
+
+	if data_input == 0:
+		uarm.set_gripper(0)
+		print 'Gripper: Off'
+	elif data_input == 1:
+		uarm.set_gripper(1)
+		print 'Gripper: On'
+	else:
+		pass
+
+
+# pump str control function once received data from topic
+def gripperStrCallback(data):
+
+	data_input = data.data
+	print data_input
+
+	if data_input.lower() == 'low' or data_input.lower() == 'off':
+		uarm.set_gripper(0)
+		print 'Gripper: Off'
+	elif data_input.lower() == 'on' or data_input.lower() == 'high':
+		uarm.set_gripper(1)
+		print 'Gripper: On'
+	else:
+		pass
 
 # angles control function once received data from topic
 def writeAnglesCallback(servos):
@@ -497,6 +526,9 @@ def listener():
 	rospy.Subscriber("uarm_status",String, attchCallback)
 	rospy.Subscriber("pump_control",UInt8, pumpCallack)
 	rospy.Subscriber("pump_str_control",String, pumpStrCallack)
+
+	rospy.Subscriber("gripper_control",UInt8, gripperCallback)
+	rospy.Subscriber("gripper_str_control",String, gripperStrCallback)
 
 	rospy.Subscriber("read_coords",Int32, currentCoordsCallback)
 	rospy.Subscriber("read_angles",Int32, readAnglesCallback)
