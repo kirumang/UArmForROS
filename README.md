@@ -137,9 +137,9 @@ source ~/.bashrc
 
     Use this node in the **monitor-mode** of `uarm_core.py` node
     ```bash
-    # pump on
+    # gripper on
     rosrun uarm gripper_node.py on
-    # pump off
+    # gripper off
     rosrun uarm gripper_node.py off
     ```
 
