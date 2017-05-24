@@ -211,6 +211,7 @@ def controlFcn():
 			print 'mt x y z speed     - move to a point with speed(mm/s)'
 			print '                     for example: mt 0 12 12 10'
 			print 'pp 1/0             - pump on/off'
+			print 'gp 1/0             - gripper on/off'
 			print 'ss                 - status of stopper'
 			print 'at                 - attach uarm'
 			print 'de                 - detach uarm'
@@ -269,6 +270,20 @@ def controlFcn():
 						uarm.set_pump(1)
 					elif commands_split[1] == '0' or commands_split[1].lower() == 'low'or commands_split[1].lower() == 'off':
 						uarm.set_pump(0)
+					else:
+						print 'Incorrect inputs, should input 1 / 0 / HIGH / LOW / ON / OFF'
+				pass
+
+			elif commands_split[0] == 'gripper' or commands_split[0] == 'gp':
+				if len(commands_split) == 1:
+					print 'Status should be input'
+				elif len(commands_split) >2:
+					print 'Too many inputs'
+				else:
+					if commands_split[1] == '1' or commands_split[1].lower() == 'high' or commands_split[1].lower() == 'on':
+						uarm.set_gripper(1)
+					elif commands_split[1] == '0' or commands_split[1].lower() == 'low'or commands_split[1].lower() == 'off':
+						uarm.set_gripper(0)
 					else:
 						print 'Incorrect inputs, should input 1 / 0 / HIGH / LOW / ON / OFF'
 				pass
