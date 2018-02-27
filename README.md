@@ -13,16 +13,31 @@ Connect uArm and get USB permission to access uArm
 ```bash
 $ cd /etc/udev/rules.d
 ```
-Creat a file `ttyUSB.rules` and put the following line: `KERNEL=="ttyUSB*", MODE="0666"`. Save the file and **reconnect** uArm USB to make it effective. (if you already have the permission to access USB, you can skip this step)
+Check dmesg to check where the robot attached (ttyUSB or ttyACM)
+```bash
+$ dmesg
+```
+
+Creat a file `ttyUSB.rules` or `ttyACM.rules` and put the following line: `KERNEL=="ttyUSB*" or "ttyACM*", MODE="0666"`. Save the file and **reconnect** uArm USB to make it effective. (if you already have the permission to access USB, you can skip this step)
+
+
 
 For using this package, the [pyUarm](https://github.com/uArm-Developer/pyuarm) library **SHOULD** be installed at first.
 ```bash
 $ pip install pyuarm
 ```
+Then, you need to change the hardware ID of uarm, by lsusb, should remember following ID XXXX:XXXX (8 digits)
+```bash
+$ lsusb
+$ sudo vim /usr/local/lib/python2.7/dist-packages/pyuarm/tools/list_uarms.py
+```
+Then, change the UARM_HWID_KEYWORD parameter to the correct ID of your uArm
+
 Connect uArm to computer and upgrade your uArmProtocol Firmware
 ```bash
 $ uarm-firmware -u
 ```
+
 
 ### 1.2 Package Download and Install
 Install ros package in your src folder of your [Catkin workspace](http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment).
